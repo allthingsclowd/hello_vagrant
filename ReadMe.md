@@ -78,5 +78,9 @@ vagrant ssh database-server
      service nginx start
     SHELL
   ```
-  These servers will now be able to communicate with each other and the host server
+  These servers will now be able to communicate with each other and the host server however it's necessary to add port forwarding to communicate beyond the host server
+  ``` vagrantfile
+  firstserver.vm.network "forwarded_port", guest: 80, host: 8020
+  ```
+  
 

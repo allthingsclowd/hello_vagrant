@@ -70,5 +70,13 @@ vagrant ssh database-server
  ``` vagrantfile
  firstserver.vm.network "private_network", ip: "172.16.0.20"
  ```
-  - now to provision some software within each of the vm the following simple inline approach can be used
+  - now to provision some software within each of the vms the following simple inline approach can be used
+  ``` vagrantfile
+    firstserver.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get install -y nginx
+     service nginx start
+    SHELL
+  ```
+  These servers will now be able to communicate with each other and the host server
 

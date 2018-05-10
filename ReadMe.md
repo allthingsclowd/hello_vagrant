@@ -45,7 +45,11 @@ this will take a few minutes if this is the first time to download the box, logi
 ``` bash
 vagrant ssh
 ```
-Now that we've verified we can build a single box (server) let's build the required 3 servers by making the following change for multiple servers
+ - reset the environment as follows before further development and testing
+ ``` bash
+vagrant destroy -f
+ ```
+Now that we've verified we can build a single box (server) let's build the required 3 servers by making the following change
  - example of a multi server vagrantfile
 ``` vagrantfile
 Vagrant.configure("2") do |config|

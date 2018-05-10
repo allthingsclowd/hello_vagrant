@@ -46,6 +46,7 @@ this will take a few minutes if this is the first time to download the box, logi
 vagrant ssh
 ```
 Now that we've verified we can build a single box (server) let's build the required 3 servers by making the following change for multiple servers
+ - example of a multi server vagrantfile
 ``` vagrantfile
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/precise64"
@@ -61,3 +62,8 @@ Vagrant.configure("2") do |config|
 
 end
 ```
+The login process is slightly different this time as there are multiple servers you need to provide the vm name 
+``` bash
+vagrant ssh database-server 
+```
+ - let's add the static consecutive addresses

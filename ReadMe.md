@@ -31,3 +31,33 @@ vagrant init hashicorp/precise64
 ``` bash
 vagrant init -fm hashicorp/precise64
 ```
+which creates the following basic vagrantfile
+``` vagrantfile
+Vagrant.configure("2") do |config|
+  config.vm.box = "hashicorp/precise64"
+end
+```
+- verify the basics are working before going any further
+``` bash
+vagrant up
+```
+this will take a few minutes if this is the first time to download the box, login with the following command
+``` bash
+vagrant ssh
+```
+Now that we've verified we can build a single box (server) let's build the required 3 servers by making the following change for multiple servers
+``` vagrantfile
+Vagrant.configure("2") do |config|
+  config.vm.box = "hashicorp/precise64"
+
+  config.vm.define "web-server-1" do |firstserver|
+  end
+
+  config.vm.define "web-server-2" do |secondserver|
+  end
+
+  config.vm.define "database-server" do |thirdserver|
+  end
+
+end
+```

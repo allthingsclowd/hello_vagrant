@@ -62,8 +62,13 @@ Vagrant.configure("2") do |config|
 
 end
 ```
-The login process is slightly different this time as there are multiple servers you need to provide the vm name 
+The login process is slightly different this time - as there are multiple servers you need to provide the vm name 
 ``` bash
 vagrant ssh database-server 
 ```
- - let's add the static consecutive addresses
+ - let's add the static addresses by adding the following line to each vm definition remembering to adjust the ip address as required
+ ``` vagrantfile
+ firstserver.vm.network "private_network", ip: "172.16.0.20"
+ ```
+  - now to provision some software within each of the vm the following simple inline approach can be used
+

@@ -127,3 +127,24 @@ end
 
 The next step will be to refactor and remove duplication....eventually.
 
+Let's first of all move the provision code into external script files called database_install.sh and webserver_install.sh and we would call them by changing the provision line as follows
+``` code
+thirdserver.vm.provision "shell", path: "database_install.sh"
+```
+Obviously adjust the provision script for the appropriate server.
+We should also makes these scripts idempotent - using a basic technique here that's mentioned in the Vagrant 'Up and Running' O'Reilly book.
+``` bash
+#!/usr/bin/env bash
+
+# Idempotency hack - if this file exists don't run the rest of the script
+if [-f "/var/vagrant_this_script_has_run"]; then
+    exit 0
+fi
+
+touch /var/vagrant_this_script_has_run
+# Add actual install code here
+.
+.
+.
+```
+

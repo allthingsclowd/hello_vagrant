@@ -137,7 +137,7 @@ We should also makes these scripts idempotent - using a basic technique here tha
 #!/usr/bin/env bash
 
 # Idempotency hack - if this file exists don't run the rest of the script
-if [-f "/var/vagrant_this_script_has_run"]; then
+if [ -f "/var/vagrant_this_script_has_run" ]; then
     exit 0
 fi
 
@@ -147,4 +147,19 @@ touch /var/vagrant_this_script_has_run
 .
 .
 ```
+Final change is to add iteration to DRY up the code
+See https://www.vagrantup.com/docs/vagrantfile/tips.html for some tips.
 
+``` Vagrantfile
+  (0..2).each do |i|
+    config.vm.define "server-#{i}" do |node|
+      node.vm.network "private_network", ip: "192.168.0.2#{i}"
+      node.vm.network "forwarded_port", guest: 80, host: "802#{i}"
+      if "#{i}" == "2"
+        node.vm.provision "shell", path: "database_install.sh"
+      else
+        node.vm.provision "shell", path: "webserver_install.sh"
+      end
+    end
+  end
+```
